@@ -21,27 +21,21 @@ class Commitment extends Component {
         <h1>{this.state.title}</h1>
         <p>Committer: {this.state.committerAddress}</p>
         <p>Judge: {this.state.judgeAddress}</p>
+        <p>You are: {this.state.viewerAddress}</p>
       </div>
     )
   }
 }
 
 class App extends Component {
-  constructor(props){
-    super(props);
-  }
-
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Accountable</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Commitment title="I will lose weight" committerAddress="0x11" judgeAddress="0xjudge" viewerAddress="0x12" active={true} />
       </div>
     );
   }
