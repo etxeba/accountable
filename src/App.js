@@ -29,13 +29,39 @@ class Commitment extends Component {
 
 class App extends Component {
 
+  // Initialize by checking the current address of the browser
+  // look at the smart contract's list of committers and judges
+  // If viewer is an active committer, then show the commitment details
+  // If viewer is an active judge, show commitment details and the certify button
+  // If neither, show the create Commitment view
+
+  constructor(props){
+    super(props);
+    this.state = {
+      viewer: "0xViewer"
+    }
+  }
+
+  getCommitments = () => {
+    var commitments = [
+      {id:1, committer: "0xViewer", judge: "0xJudge", title:"Lose weight", active:true},
+      {id:2, committer: "0x11", judge:"0xJudge", title:"Make Money", active:true}
+    ];
+
+    var foundCommitments = commitments.map((commitment) =>
+      commitment.committer == this.state.viewer && commitment.active &&
+      <li><Commitment title={commitment.title} committerAddress={commitment.committer} judgeAddress={commitment.judge} viewerAddress={this.state.viewer} active={commitment.active} /></li>
+    )
+    return foundCommitments
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Accountable</h1>
         </header>
-        <Commitment title="I will lose weight" committerAddress="0x11" judgeAddress="0xjudge" viewerAddress="0x12" active={true} />
+        <ul>{this.getCommitments()}</ul>
       </div>
     );
   }
